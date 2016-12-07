@@ -5,9 +5,9 @@
 
 exports.do_work = function(req, res){
   res.render('index.jade', { 
-	  title: 'Please enter a person login' 
+	  title: 'Welcome to our Home Page' 
   });
 };
 exports.do_ref = function(req, res){
-  res.render('reference.jade', {});
+  res.render('index.jade', {});
 };
