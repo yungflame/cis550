@@ -1,5 +1,6 @@
 var express = require('express')
   , routes = require('./routes')
+  , index = require('./routes/index')
   , about = require('./routes/about')
   , contact = require('./routes/contact')
   , nopage = require('./routes/nopage')
@@ -13,7 +14,6 @@ var express = require('express')
 var app = express();
 // .. and our app
 init_app(app);
-
 // When we get a request for {app}/ we should call routes/index.js
 app.get('/', routes.do_work);
 app.get('/index', routes.do_work);
@@ -21,7 +21,6 @@ app.get('/index', routes.do_work);
 app.get('/about', about.do_work);
 app.get('/contact', contact.do_work);
 app.get('*', nopage.do_work);
-
 // Listen on the port we specify
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
@@ -39,7 +38,7 @@ function compile(str, path) {
 // This is app initialization code
 function init_app() {
 	// all environments
-	app.set('port', process.env.PORT || 8080);
+	app.set('port', process.env.PORT || 3306);
 	
 	// Use Jade to do views
 	app.set('views', __dirname + '/views');
