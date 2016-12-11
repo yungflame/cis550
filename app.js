@@ -38,7 +38,7 @@ function compile(str, path) {
 // This is app initialization code
 function init_app() {
 	// all environments
-	app.set('port', process.env.PORT || 3306);
+	app.set('port', process.env.PORT || 8080);
 	
 	// Use Jade to do views
 	app.set('views', __dirname + '/views');

@@ -15,25 +15,24 @@ var connection;
 
 function query_db(res) {
 	connection.query({
-	sql: 'SELECT A.Name FROM ATHLETE A',
-	timeout: 40000, // 40s
+	sql: "SELECT A.Name FROM ATHLETE A WHERE A.Country = 'HUN'",
+	timeout: 3000, // 3s
 	}, function (error, results, fields) {
 		if (error) {
 			console.log(error); 
 		}
 		else {
-			// output_homepage(res, rows);
-			console.log(results)
+			output_homepage(res, results);
 		}
 	});
 }
 
-// function output_homepage(res,results) {
-// 	res.render('index.jade', //TO-DO: render some html
-// 		   { title: "Welcome To Our Home Page",
-// 		     results: results }
-// 	  );
-// }
+function output_homepage(res,results) {
+	res.render('index.jade', //TO-DO: render some html
+		   { title: "Welcome To Our Home Page",
+		     results: results }
+	  );
+}
  
 exports.do_work = function(req, res){
 	connection = mysql.createConnection(db_config);

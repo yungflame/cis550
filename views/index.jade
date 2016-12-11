@@ -40,18 +40,14 @@ body
           p Brief caption
         // col-sm-12
       // row
-        form(method="get", action="/person")
-        p
-          select(name = "name")
-            - for (var inx = 0; inx < results.length; inx++)
-              option #{results[inx].login}
+      .row
+        .col-sm-12
           table
             - for (var inx = 0; inx < results.length; inx++)
               tr
-                td=results[inx].country+" "
+                td=results[inx][NAME]+" "
                 td &nbsp;
-                td=results[inx].year
-                td &nbsp;
-                td=results[inx].gdp
+        // col-sm-12
+      // row
       div(style='height:100px')
     // container
