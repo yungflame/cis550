@@ -13,11 +13,16 @@ var db_config ={
 
 var connection;
 
-var query = "SELECT A.Name FROM ATHLETE A WHERE A.Country = 'HUN'";
+var query1 = "SELECT A.GENDER, CI.MEDAL, COUNT(CI.MEDAL) AS NUM \
+FROM COMPETES_IN CI INNER JOIN ATHLETE A \
+  ON CI.NAME=A.NAME \
+WHERE CI.YEAR='2008' \
+  AND A.COUNTRY='USA' \
+GROUP BY A.GENDER, CI.MEDAL;";
 
 function query_db(res, query) {
 	connection.query({
-	sql: query,
+	sql: query1,
 	timeout: 3000, // 3s
 	}, function (error, results, fields) {
 		if (error) {
@@ -25,6 +30,7 @@ function query_db(res, query) {
 		}
 		else {
 			output_homepage(res, results);
+			console.log(results)
 		}
 	});
 }
@@ -38,7 +44,7 @@ function output_homepage(res,results) {
  
 exports.do_work = function(req, res){
 	connection = mysql.createConnection(db_config);
-	query_db(res, query);
+	query_db(res, query1);
 };
 
  
