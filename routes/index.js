@@ -19,11 +19,12 @@ var query_set = [
 	  ON CI.NAME=A.NAME \
 	WHERE CI.YEAR='2008' \
 	  AND A.COUNTRY='USA' \
-	GROUP BY A.GENDER, CI.MEDAL;"
+	GROUP BY A.GENDER, CI.MEDAL \
+	ORDER BY CI.MEDAL, A.GENDER;"
 ]
 
 var chart_description_set = [ 
-	"The medal distribution between male and female medalists in the Beijing 2008 Olympics"
+	"The medal distribution between US male and female medalists in the Beijing 2008 Olympics"
 ]
 
 function query_db(res, query, query_number) {

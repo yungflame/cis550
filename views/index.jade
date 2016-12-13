@@ -39,7 +39,7 @@ body
                   labels: ["Bronze", "Silver", "Gold"],
                   datasets: [{
                   label: '# of Medals (Men)',
-                  data: [#{results[0].NUM}, #{results[2].NUM}, #{results[1].NUM}],
+                  data: [#{results[0].NUM}, #{results[4].NUM}, #{results[2].NUM}],
                   backgroundColor: [
                   'rgba(205, 127, 50, 0.2)',
                   'rgba(160, 160, 160, 0.2)',
@@ -50,11 +50,11 @@ body
                   'rgba(160, 160, 160, 1)',
                   'rgba(255, 206, 86, 1)'
                   ],
-                  borderWidth: 1
+                  borderWidth: 2
                   },
                   {
                   label: '# of Medals (Women)',
-                  data: [#{results[3].NUM}, #{results[5].NUM}, #{results[4].NUM}],
+                  data: [#{results[1].NUM}, #{results[5].NUM}, #{results[3].NUM}],
                   backgroundColor: [
                   'rgba(205, 127, 20, 0.2)',
                   'rgba(160, 160, 130, 0.2)',
@@ -65,7 +65,7 @@ body
                   'rgba(160, 160, 130, 1)',
                   'rgba(255, 206, 56, 1)'
                   ],
-                  borderWidth: 1
+                  borderWidth: 2
                   }]
                   },
                   options: {
