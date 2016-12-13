@@ -1,6 +1,6 @@
 
 /*
- * Require express and Chart.js
+ * Require mysql
  */
 var mysql = require('mysql');
 
@@ -54,6 +54,6 @@ function output_homepage(res,results, query_number) {
  
 exports.do_work = function(req, res){
 	connection = mysql.createConnection(db_config);
-	var i = 0;
+	var i = Math.floor((Math.random())); // always returns 0 for now
 	query_db(res, query_set[i], i);
 };
