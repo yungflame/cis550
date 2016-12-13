@@ -7,7 +7,7 @@ head
   link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
   script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
   script(src='script.js')
-  script(src='Chart.js')
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js")
 body
   div
     div
@@ -24,31 +24,43 @@ body
     .page-header.text-center
       h1 #{title}
     // page-header
-    .container(style='max-width:800px')
-      .row.text-center
-        .col-sm-12
-          img.img-responsive(src='http://www.quickanddirtytips.com/sites/default/files/images/5360/line_graph.png')
-          h3 Sample Graph 1
-          p Brief caption
-        // col-sm-12
-      // row
-      br
-      br
-      .row.text-center
-        .col-sm-12
-          img.img-responsive(src='http://www.glowscript.org/docs/GlowScriptDocs/images/graph.jpg')
-          h3 Sample Graph 2
-          p Brief caption
-        // col-sm-12
-      // row
-      .row
-        .col-sm-12
-          table
-            - for (var inx = 0; inx < results.length; inx++)
-              tr
-                td=results[inx].Name+" "
-                td &nbsp;
-        // col-sm-12
-      // row
-      div(style='height:100px')
-    // container
+    .container
+      canvas#myChart(width='400', height='400')
+      script.
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+        'rgba(255,99,132,1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+        }]
+        },
+        options: {
+        scales: {
+        yAxes: [{
+        ticks: {
+        beginAtZero:true
+        }
+        }]
+        }
+        }
+        });
