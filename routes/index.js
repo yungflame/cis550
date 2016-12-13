@@ -1,6 +1,6 @@
 
 /*
- * GET home page, which is specified in Jade.
+ * Require express and Chart.js
  */
 var mysql = require('mysql');
 
@@ -13,9 +13,11 @@ var db_config ={
 
 var connection;
 
-function query_db(res) {
+var query = "SELECT A.Name FROM ATHLETE A WHERE A.Country = 'HUN'";
+
+function query_db(res, query) {
 	connection.query({
-	sql: "SELECT A.Name FROM ATHLETE A WHERE A.Country = 'HUN'",
+	sql: query,
 	timeout: 3000, // 3s
 	}, function (error, results, fields) {
 		if (error) {
@@ -36,7 +38,7 @@ function output_homepage(res,results) {
  
 exports.do_work = function(req, res){
 	connection = mysql.createConnection(db_config);
-	query_db(res);
+	query_db(res, query);
 };
 
  
