@@ -34,47 +34,22 @@ body
             var myChart = new Chart(ctx, {
               type: 'bar',
               data: {
-              labels: ["Bronze", "Silver", "Gold"],
-              datasets: [{
-              label: '# of Medals (Men)',
-              data: [(#{results[0][0].NUM}), (#{results[0][4].NUM}), (#{results[0][2].NUM})],
-              backgroundColor: [
-              'rgba(205, 127, 50, 0.2)',
-              'rgba(160, 160, 160, 0.2)',
-              'rgba(255, 206, 86, 0.2)'
-              ],
-              borderColor: [
-              'rgba(205, 127, 50, 1)',
-              'rgba(160, 160, 160, 1)',
-              'rgba(255, 206, 86, 1)'
-              ],
-              borderWidth: 2
+                labels: ["Bronze", "Silver", "Gold"],
+                datasets: [{
+                  label: '# of Medals (Men)',
+                  data: [(#{results[0][0].NUM}), (#{results[0][4].NUM}), (#{results[0][2].NUM})],
+                  backgroundColor: ['rgba(205, 127, 50, 0.2)','rgba(160, 160, 160, 0.2)','rgba(255, 206, 86, 0.2)'],
+                  borderColor: ['rgba(205, 127, 50, 1)','rgba(160, 160, 160, 1)','rgba(255, 206, 86, 1)'],
+                  borderWidth: 2
+                }, {
+                  label: '# of Medals (Women)',
+                  data: [(#{results[0][1].NUM}), (#{results[0][5].NUM}), (#{results[0][3].NUM})],
+                  backgroundColor: ['rgba(205, 127, 20, 0.2)','rgba(160, 160, 130, 0.2)','rgba(255, 206, 56, 0.2)'],
+                  borderColor: ['rgba(205, 127, 20, 1)','rgba(160, 160, 130, 1)','rgba(255, 206, 56, 1)'],
+                  borderWidth: 2
+                }]
               },
-              {
-              label: '# of Medals (Women)',
-              data: [(#{results[0][1].NUM}), (#{results[0][5].NUM}), (#{results[0][3].NUM})],
-              backgroundColor: [
-              'rgba(205, 127, 20, 0.2)',
-              'rgba(160, 160, 130, 0.2)',
-              'rgba(255, 206, 56, 0.2)'
-              ],
-              borderColor: [
-              'rgba(205, 127, 20, 1)',
-              'rgba(160, 160, 130, 1)',
-              'rgba(255, 206, 56, 1)'
-              ],
-              borderWidth: 2
-              }]
-              },
-              options: {
-              scales: {
-              yAxes: [{
-              ticks: {
-              beginAtZero:true
-              }
-              }]
-              }
-              }
+              options: {scales: {yAxes: [{ticks: {beginAtZero:true}}]}}
             });
           }
           else if (#{charttype} == 1) {
@@ -93,6 +68,33 @@ body
                 }]
               }
             });
+          }
+          else if (#{charttype} == 2) {
+            var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ["Bronze", "Silver", "Gold"],
+                datasets: [
+                {
+                  label: '# of Medals in Mens Events',
+                  data: [#{results[2][0].NUM}, #{results[2][6].NUM}, #{results[2][3].NUM}],
+                  backgroundColor: ['rgba(205, 127, 50, 0.2)','rgba(160, 160, 160, 0.2)','rgba(255, 206, 86, 0.2)']
+                },
+                {
+                  label: '# of Medals in Womens Events',
+                  data: [#{results[2][1].NUM}, #{results[2][7].NUM}, #{results[2][4].NUM}],
+                  backgroundColor: ['rgba(205, 127, 50, 0.2)','rgba(160, 160, 160, 0.2)','rgba(255, 206, 86, 0.2)']
+                },
+                {
+                  label: '# of Medals in Mixed Gender Events',
+                  data: [#{results[2][2].NUM}, #{results[2][8].NUM}, #{results[2][5].NUM}],
+                  backgroundColor: ['rgba(205, 127, 50, 0.2)','rgba(160, 160, 160, 0.2)','rgba(255, 206, 86, 0.2)']
+                }
+                ]
+              },
+              options: {
+                scales: {yAxes: [{ticks: {beginAtZero:true}}]}
+              }});
           }
           else {
             console.log('No Such ChartType')
