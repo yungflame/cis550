@@ -28,63 +28,75 @@ body
       div(style='height:400px;')
         canvas#myChart(width='400', height='200')
         script.
-          //- switch case for various charts
+          //- switch case for various chart
           var ctx = document.getElementById("myChart");
-          switch(#{charttype}) {
-              case 0:
-                var mens = []
-                var myChart = new Chart(ctx, {
-                  type: 'bar',
-                  data: {
-                  labels: ["Bronze", "Silver", "Gold"],
-                  datasets: [{
-                  label: '# of Medals (Men)',
-                  data: [#{results[0].NUM}, #{results[4].NUM}, #{results[2].NUM}],
-                  backgroundColor: [
-                  'rgba(205, 127, 50, 0.2)',
-                  'rgba(160, 160, 160, 0.2)',
-                  'rgba(255, 206, 86, 0.2)'
-                  ],
-                  borderColor: [
-                  'rgba(205, 127, 50, 1)',
-                  'rgba(160, 160, 160, 1)',
-                  'rgba(255, 206, 86, 1)'
-                  ],
-                  borderWidth: 2
-                  },
-                  {
-                  label: '# of Medals (Women)',
-                  data: [#{results[1].NUM}, #{results[5].NUM}, #{results[3].NUM}],
-                  backgroundColor: [
-                  'rgba(205, 127, 20, 0.2)',
-                  'rgba(160, 160, 130, 0.2)',
-                  'rgba(255, 206, 56, 0.2)'
-                  ],
-                  borderColor: [
-                  'rgba(205, 127, 20, 1)',
-                  'rgba(160, 160, 130, 1)',
-                  'rgba(255, 206, 56, 1)'
-                  ],
-                  borderWidth: 2
-                  }]
-                  },
-                  options: {
-                  scales: {
-                  yAxes: [{
-                  ticks: {
-                  beginAtZero:true
-                  }
-                  }]
-                  }
-                  }
-                });
-                break;
-              case 1:
-                break;
-              default:
-                console.log('No Such ChartType')
+          if (#{charttype} == 0) {
+            var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+              labels: ["Bronze", "Silver", "Gold"],
+              datasets: [{
+              label: '# of Medals (Men)',
+              data: [(#{results[0][0].NUM}), (#{results[0][4].NUM}), (#{results[0][2].NUM})],
+              backgroundColor: [
+              'rgba(205, 127, 50, 0.2)',
+              'rgba(160, 160, 160, 0.2)',
+              'rgba(255, 206, 86, 0.2)'
+              ],
+              borderColor: [
+              'rgba(205, 127, 50, 1)',
+              'rgba(160, 160, 160, 1)',
+              'rgba(255, 206, 86, 1)'
+              ],
+              borderWidth: 2
+              },
+              {
+              label: '# of Medals (Women)',
+              data: [(#{results[0][1].NUM}), (#{results[0][5].NUM}), (#{results[0][3].NUM})],
+              backgroundColor: [
+              'rgba(205, 127, 20, 0.2)',
+              'rgba(160, 160, 130, 0.2)',
+              'rgba(255, 206, 56, 0.2)'
+              ],
+              borderColor: [
+              'rgba(205, 127, 20, 1)',
+              'rgba(160, 160, 130, 1)',
+              'rgba(255, 206, 56, 1)'
+              ],
+              borderWidth: 2
+              }]
+              },
+              options: {
+              scales: {
+              yAxes: [{
+              ticks: {
+              beginAtZero:true
+              }
+              }]
+              }
+              }
+            });
+          }
+          else if (#{charttype} == 1) {
+            var myChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+                datasets: [{
+                  label: 'apples',
+                  data: [12, 19, 3, 17, 6, 3, 7],
+                  backgroundColor: "rgba(153,255,51,0.4)"
+                }, {
+                  label: 'oranges',
+                  data: [2, 29, 5, 5, 2, 3, 10],
+                  backgroundColor: "rgba(255,153,0,0.4)"
+                }]
+              }
+            });
+          }
+          else {
+            console.log('No Such ChartType')
           }
         .panel.panel-default
           .panel-body
             | #{description}
-        #{description}
