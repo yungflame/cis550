@@ -9,13 +9,18 @@ var db_config ={
 };
 
 var connection;
-
-
+/*
+	"SELECT CI.AGENDER, CI.MEDAL, COUNT(CI.MEDAL) AS NUM \
+	FROM COMPETES_IN CI \
+	WHERE CI.YEAR='2004' \
+	  AND CI.COUNTRY='Japan' \
+	GROUP BY CI.AGENDER, CI.MEDAL;"
+*/
 function query_db2(res,country,year) { 
-  query = "SELECT CI.AGENDER, CI.MEDAL, COUNT(CI.MEDAL) AS NUM" +
-  "FROM COMPETES_IN CI" +
-  "WHERE CI.YEAR='" + year + "'" + "AND CI.COUNTRY = '" + country + "'" +
-  "GROUP BY CI. AGENDER, CI.MEDAL";
+  query = "SELECT CI.AGENDER, CI.MEDAL, COUNT(CI.MEDAL) AS NUM " +
+  "FROM COMPETES_IN CI " +
+  "WHERE CI.YEAR='" + year + "'" + " AND CI.COUNTRY = '" + country + "'" +
+  " GROUP BY CI. AGENDER, CI.MEDAL";
 	connection.query(query,
 		function (error, row, fields) {
 			if (error) {
@@ -23,17 +28,16 @@ function query_db2(res,country,year) {
 			}
 			else {
 				console.log(row);
-				//output_useform(res, row);
+				output_userchart(res, row);
 			}
 		});
 }
-function output_useform(res,results) {
+function output_userchart(res,results) {
 	res.render('userchart.jade',
 		   { title: "Choose a country",
 		     results: results }
 	  );
 }
-
 
 function query_db1(res) { 
   query = "SELECT DISTINCT(C.COUNTRY) FROM COUNTRY_DATA C";
@@ -43,12 +47,12 @@ function query_db1(res) {
 				console.log(error); 
 			}
 			else {
-				console.log(row);
-				output_useform(res, row);
+				//console.log(row);
+				output_userform(res, row);
 			}
 		});
 }
-function output_useform(res,results) {
+function output_userform(res,results) {
 	res.render('userform.jade',
 		   { title: "Choose a country",
 		     results: results }
@@ -61,12 +65,9 @@ exports.do_work = function(req, res){
   var country = req.query.country; // $_GET["country"]
   var year = req.query.year;
   if (country) { 
-    query_db2(res,)
-  /*
-    res.render('chartform.jade', { 
-      title: "Here's Your Chart",
-      country: country
-    });*/
+    //console.log(country);
+    //console.log(year);
+    query_db2(res,country,year);
   }
   else {
     query_db1(res);
