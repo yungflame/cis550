@@ -96,6 +96,52 @@ body
                 scales: {yAxes: [{ticks: {beginAtZero:true}}]}
               }});
           }
+          else if (#{charttype} == 3) {
+            var myChart = new Chart(ctx, {
+              type: 'line',
+              data: {
+                datasets: [{
+                  label: 'log-GDP (left axis)',
+                  fill: false,
+                  yAxisID: "y-axis-0",
+                  borderColor: "#1b8a5a",
+                  backgroundColor: "#1b8a5a",
+                  lineTension: 0,
+                  data: [
+                  {x: #{results[3][0].YEAR}, y: Math.log(#{results[3][0].GDP} * 1000)},
+                  {x: #{results[3][1].YEAR}, y: Math.log(#{results[3][1].GDP} * 1000)},
+                  {x: #{results[3][2].YEAR}, y: Math.log(#{results[3][2].GDP} * 1000)},
+                  {x: #{results[3][3].YEAR}, y: Math.log(#{results[3][3].GDP} * 1000)},
+                  {x: #{results[3][4].YEAR}, y: Math.log(#{results[3][4].GDP} * 1000)},
+                  {x: #{results[3][5].YEAR}, y: Math.log(#{results[3][5].GDP} * 1000)},
+                  {x: #{results[3][6].YEAR}, y: Math.log(#{results[3][6].GDP} * 1000)},
+                  {x: #{results[3][7].YEAR}, y: Math.log(#{results[3][7].GDP} * 1000)}
+                  ]
+                }, {
+                  label: 'Cost of Olympics (right axis)',
+                  fill: false,
+                  yAxisID: "y-axis-1",
+                  borderColor: "#f68838",
+                  backgroundColor: "#f68838",
+                  lineTension: 0,
+                  data: [
+                  {x: #{results[3][0].YEAR}, y: #{results[3][0].COST}},
+                  {x: #{results[3][1].YEAR}, y: #{results[3][1].COST}},
+                  {x: #{results[3][2].YEAR}, y: #{results[3][2].COST}},
+                  {x: #{results[3][3].YEAR}, y: #{results[3][3].COST}},
+                  {x: #{results[3][4].YEAR}, y: #{results[3][4].COST}},
+                  {x: #{results[3][5].YEAR}, y: #{results[3][5].COST}},
+                  {x: #{results[3][6].YEAR}, y: #{results[3][6].COST}},
+                  {x: #{results[3][7].YEAR}, y: #{results[3][7].COST}}
+                  ]
+                }]
+              },
+              options: {scales: {
+                xAxes: [{type: 'linear', position: 'bottom', ticks: {stepSize: 4}}],
+                yAxes: [{position: 'left', id: 'y-axis-0'}, {position: 'right', id: 'y-axis-1'}]
+              }}
+            });
+          }
           else {
             console.log('No Such ChartType')
           }
