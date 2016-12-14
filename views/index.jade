@@ -28,6 +28,9 @@ body
     // page-header
     .container
       div(style='height:400px;')
+        h4
+          .text-center
+            | #{description}
         canvas#myChart(width='400', height='200')
         script.
           //- switch case for various chart
@@ -60,15 +63,24 @@ body
               data: {
                 labels: ['1984', '1988', '1992', '1996', '2000', '2004', '2008'],
                 datasets: [{
-                  label: 'GDP in millions of USD',
+                  label: 'GDP in millions of USD (left axis)',
+                  yAxisID: "y-axis-0",
+                  fill: false,
                   data: [#{results[1][0].GDP}, #{results[1][1].GDP}, #{results[1][2].GDP}, #{results[1][3].GDP}, #{results[1][4].GDP}, #{results[1][5].GDP}, #{results[1][6].GDP}],
-                  backgroundColor: "rgba(153,255,51,0.4)"
+                  borderColor: "rgba(133,215,41,0.5)",
+                  backgroundColor: "rgba(133,215,41,0.8)"
                 }, {
-                  label: '# of Medalists',
+                  label: '# of Medalists (right axis)',
+                  yAxisID: "y-axis-1",
+                  fill: false,
                   data: [#{results[1][0].NUM}, #{results[1][1].NUM}, #{results[1][2].NUM}, #{results[1][3].NUM}, #{results[1][4].NUM}, #{results[1][5].NUM}, #{results[1][6].NUM}],
-                  backgroundColor: "rgba(255,153,0,0.4)"
+                  borderColor: "rgba(255,153,0,0.5)",
+                  backgroundColor: "rgba(255,153,0,0.8)"
                 }]
-              }
+              },
+              options: {scales: {
+                yAxes: [{position: 'left', id: 'y-axis-0'}, {position: 'right', id: 'y-axis-1'}]
+              }}
             });
           }
           else if (#{charttype} == 2) {
@@ -80,17 +92,17 @@ body
                 {
                   label: '# of Medals in Mens Events',
                   data: [#{results[2][0].NUM}, #{results[2][6].NUM}, #{results[2][3].NUM}],
-                  backgroundColor: ['rgba(205, 127, 50, 0.2)','rgba(160, 160, 160, 0.2)','rgba(255, 206, 86, 0.2)']
+                  backgroundColor: ['rgba(205, 127, 50, 0.4)','rgba(160, 160, 160, 0.4)','rgba(255, 206, 86, 0.4)']
                 },
                 {
                   label: '# of Medals in Womens Events',
                   data: [#{results[2][1].NUM}, #{results[2][7].NUM}, #{results[2][4].NUM}],
-                  backgroundColor: ['rgba(205, 127, 50, 0.2)','rgba(160, 160, 160, 0.2)','rgba(255, 206, 86, 0.2)']
+                  backgroundColor: ['rgba(205, 127, 50, 0.4)','rgba(160, 160, 160, 0.4)','rgba(255, 206, 86, 0.4)']
                 },
                 {
                   label: '# of Medals in Mixed Gender Events',
                   data: [#{results[2][2].NUM}, #{results[2][8].NUM}, #{results[2][5].NUM}],
-                  backgroundColor: ['rgba(205, 127, 50, 0.2)','rgba(160, 160, 160, 0.2)','rgba(255, 206, 86, 0.2)']
+                  backgroundColor: ['rgba(205, 127, 50, 0.4)','rgba(160, 160, 160, 0.4)','rgba(255, 206, 86, 0.4)']
                 }
                 ]
               },
@@ -150,12 +162,12 @@ body
                 data: {
                   datasets: [{
                       data: [
-                          #{results[4][0].POPULATION},
-                          #{results[4][1].POPULATION},
-                          #{results[4][2].POPULATION},
-                          #{results[4][3].POPULATION},
-                          #{results[4][4].POPULATION},
-                          #{results[4][5].POPULATION}
+                          #{results[4][0].POPULATION} / 1000,
+                          #{results[4][1].POPULATION} / 1000,
+                          #{results[4][2].POPULATION} / 1000,
+                          #{results[4][3].POPULATION} / 1000,
+                          #{results[4][4].POPULATION} / 1000,
+                          #{results[4][5].POPULATION} / 1000
                       ],
                       backgroundColor: [
                           "#FF6384",
@@ -168,15 +180,20 @@ body
                       label: 'Country Populations' // for legend
                   }],
                   labels: [
-                      "Brazil",
-                      "Canada",
-                      "China",
-                      "Germany",
-                      "India",
-                      "USA"
+                      "#{results[4][0].COUNTRY}",
+                      "#{results[4][1].COUNTRY}",
+                      "#{results[4][2].COUNTRY}",
+                      "#{results[4][3].COUNTRY}",
+                      "#{results[4][4].COUNTRY}",
+                      "#{results[4][5].COUNTRY}"
                   ]
               },
               options: {
+                  scales: {
+                    ticks: {
+                      beginAtZero: true
+                    }
+                  },
                   elements: {
                       arc: {
                           borderColor: "#000000"
@@ -185,9 +202,20 @@ body
               }
             });
           }
+          else if (#{charttype} == 5) {
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                  datasets: [{
+                      data: [#{results[5][0].NUM}, #{results[5][1].NUM}, #{results[5][2].NUM}, #{results[5][3].NUM}],
+                      backgroundColor: [ "#5D5393", "#D4BF6A", "#D47E6A", "#4C996B"]
+                  }],
+                  labels: ['#{results[5][0].SPORT}', '#{results[5][1].SPORT}', '#{results[5][2].SPORT}', '#{results[5][3].SPORT}']
+              },
+              options: {elements: {arc: {borderColor: "#000000"}}}
+            });
+          }
           else {
             console.log('No Such ChartType')
           }
-        .panel.panel-default
-          .panel-body
-            | #{description}
+        

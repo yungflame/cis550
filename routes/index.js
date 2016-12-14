@@ -48,7 +48,17 @@ var query_set = [
 	"SELECT C.COUNTRY, C.POPULATION \
 	FROM COUNTRY_DATA C \
 	WHERE C.YEAR = 2014 \
-	  AND (C.COUNTRY = 'China' OR C.COUNTRY = 'Germany' OR C.COUNTRY = 'Canada' OR C.COUNTRY = 'Brazil' OR C.COUNTRY = 'India' OR C.COUNTRY = 'USA');"
+	  AND (C.COUNTRY = 'China' OR C.COUNTRY = 'Russia' OR C.COUNTRY = 'Indonesia' OR C.COUNTRY = 'Brazil' OR C.COUNTRY = 'India' OR C.COUNTRY = 'United States');",
+// Query 5
+	"SELECT t1.SPORT, COUNT(*) AS NUM \
+	FROM ( \
+	SELECT DISTINCT E.EVENT, E.DISCIPLINE, E.GENDER, E.SPORT, C.MEDAL \
+	FROM COMPETES_IN C INNER JOIN EVENT E \
+	  ON C.EVENT = E.EVENT AND C.DISCIPLINE = E.DISCIPLINE AND C.EGENDER = E.GENDER \
+	WHERE C.COUNTRY = 'Australia' \
+	  AND C.YEAR = '1976' \
+	) t1 \
+	GROUP BY t1.SPORT;"
 ]
 
 var chart_description_set = [ 
@@ -56,7 +66,8 @@ var chart_description_set = [
 	"Comparing the GDP of China to the number of Chinese medalists from 1984 onwards",
 	"The medal distribution of the US by event gender at the Beijing 2008 Olympics",
 	"Cost of the Olympics for the host country vs log-GDP (both in USD)",
-	"Comparing populations from high population countries around the world"
+	"Comparing populations (in millions) from high population countries around the world",
+	"Breakdown by sport of Australia's medals in the 1976 Olympics"
 ]
 
 function query_db(res, query_number) { 
