@@ -1,0 +1,20 @@
+html
+  head
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+  body
+    div
+      div
+        nav.navbar.navbar-inverse(role='navigation', style='padding-left:100px;')
+          ul.nav.navbar-nav
+            li
+              a(href='/') Home
+            li.active
+              a(href='/userform') 
+                | Try It Yourself
+                span.sr-only (current)
+            li
+              a(href='/about') About Us
+            li
+              a(href='/contact') Contact Us
+      br

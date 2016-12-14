@@ -1,6 +1,7 @@
 var express = require('express')
   , routes = require('./routes')
   , index = require('./routes/index')
+  , userform = require('./routes/userform')
   , about = require('./routes/about')
   , contact = require('./routes/contact')
   , nopage = require('./routes/nopage')
@@ -18,6 +19,7 @@ init_app(app);
 app.get('/', routes.do_work);
 app.get('/index', routes.do_work);
 // when we get a request for {app/person} we should call routes/person.js
+app.get('/userform', userform.do_work);
 app.get('/about', about.do_work);
 app.get('/contact', contact.do_work);
 app.get('*', nopage.do_work);
