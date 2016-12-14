@@ -36,13 +36,21 @@ var query_set = [
 	WHERE CI.COUNTRY = 'United States' \
 	  AND CI.YEAR = 2008 \
 	ORDER BY CI.MEDAL, CI.EGENDER) t1 \
-	GROUP BY t1.MEDAL, t1.EGENDER;"
+	GROUP BY t1.MEDAL, t1.EGENDER;",
+// Query 3
+	"SELECT H.COUNTRY, H.YEAR, H.COST, C.GDP \
+	FROM HOST_CITY H, COUNTRY_DATA C \
+	WHERE H.COUNTRY = C.COUNTRY \
+	  AND H.YEAR = C.YEAR \
+	  AND H.COST IS NOT NULL \
+	  AND H.YEAR >= 1972;"
 ]
 
 var chart_description_set = [ 
 	"The medal distribution between Japanese male and female medalists in the Athens 2004 Olympics",
 	"Comparing the GDP of China to the number of Chinese medalists from 1984 onwards",
-	"The medal distribution of the US by event gender at the Beijing 2008 Olympics"
+	"The medal distribution of the US by event gender at the Beijing 2008 Olympics",
+	"Cost of the Olympics for the host country vs log-GDP (both in USD)"
 ]
 
 function query_db(res, query_number) { 
