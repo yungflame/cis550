@@ -56,7 +56,7 @@ function query_db(res, query_number) {
 				console.log(error); 
 			}
 			else {
-				console.log(row);
+				//console.log(row);
 				output_homepage(res, row, query_number);
 			}
 		});
@@ -75,6 +75,11 @@ function output_homepage(res,results, query_number) {
  
 exports.do_work = function(req, res){
 	connection = mysql.createConnection(db_config);
-	var i = Math.floor(query_set.length * Math.random()); // RNG FOR Homepage Chart
+	var i = getInt(0, query_set.length-1); // RNG FOR Homepage Chart
+  console.log(i);
 	query_db(res, i);
 };
+
+function getInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
