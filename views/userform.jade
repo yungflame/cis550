@@ -21,6 +21,11 @@ html
       .container
         .row
           .col-md-1
+          .col-md-2
+            p This will return a chart showing distribution of medals for a country in a given year. 
+              It will break down the distribution by gender and medal.
+        .row
+          .col-md-1
           .col-md-2    
             form(method='get', action='/userform')
               p Select Country:
@@ -36,4 +41,4 @@ html
                   option 2000
                   option 2004
                   option 2008
-              input(type='submit', value='Show chart')
+              input(type='submit', value='Show Chart')

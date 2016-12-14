@@ -9,13 +9,7 @@ var db_config ={
 };
 
 var connection;
-/*
-	"SELECT CI.AGENDER, CI.MEDAL, COUNT(CI.MEDAL) AS NUM \
-	FROM COMPETES_IN CI \
-	WHERE CI.YEAR='2004' \
-	  AND CI.COUNTRY='Japan' \
-	GROUP BY CI.AGENDER, CI.MEDAL;"
-*/
+
 function query_db2(res,country,year) { 
   query = "SELECT CI.AGENDER, CI.MEDAL, COUNT(CI.MEDAL) AS NUM " +
   "FROM COMPETES_IN CI " +
@@ -27,14 +21,19 @@ function query_db2(res,country,year) {
 				console.log(error); 
 			}
 			else {
-				console.log(row);
-				output_userchart(res, row);
+				for (var i = 0; i < 6; i++) {
+					if (!row[i]) {
+						row[i] = {NUM: 0};
+					}
+				}
+				output_userchart(res, row, country, year);
 			}
 		});
 }
-function output_userchart(res,results) {
-	res.render('userchart.jade',
-		   { title: "Choose a country",
+function output_userchart(res,results, country, year) {
+	res.render('chartform.jade',
+		   { country: country,
+		   	 year: year,
 		     results: results }
 	  );
 }
@@ -47,7 +46,6 @@ function query_db1(res) {
 				console.log(error); 
 			}
 			else {
-				//console.log(row);
 				output_userform(res, row);
 			}
 		});
