@@ -89,8 +89,7 @@ function output_homepage(res,results, query_number) {
  
 exports.do_work = function(req, res){
 	connection = mysql.createConnection(db_config);
-	//var i = getInt(0, query_set.length-1); // RNG FOR Homepage Chart
-	var i = 4;
+	var i = getInt(0, query_set.length-1); // RNG FOR Homepage Chart
 	query_db(res, i);
 };
 
