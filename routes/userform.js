@@ -10,34 +10,68 @@ var db_config ={
 
 var connection;
 
-function query_db(res, query_number) { 
-		var multiquery = '';
-		for (var i = 0; i < query_set.length; i++) {
-			multiquery += query_set[i];
-		}
-		connection.query(multiquery,
+
+function query_db2(res,country,year) { 
+  query = "SELECT CI.AGENDER, CI.MEDAL, COUNT(CI.MEDAL) AS NUM" +
+  "FROM COMPETES_IN CI" +
+  "WHERE CI.YEAR='" + year + "'" + "AND CI.COUNTRY = '" + country + "'" +
+  "GROUP BY CI. AGENDER, CI.MEDAL";
+	connection.query(query,
 		function (error, row, fields) {
 			if (error) {
 				console.log(error); 
 			}
 			else {
-				//console.log(row);
-				output_homepage(res, row, query_number);
+				console.log(row);
+				//output_useform(res, row);
 			}
 		});
 }
+function output_useform(res,results) {
+	res.render('userchart.jade',
+		   { title: "Choose a country",
+		     results: results }
+	  );
+}
+
+
+function query_db1(res) { 
+  query = "SELECT DISTINCT(C.COUNTRY) FROM COUNTRY_DATA C";
+		connection.query(query,
+		function (error, row, fields) {
+			if (error) {
+				console.log(error); 
+			}
+			else {
+				console.log(row);
+				output_useform(res, row);
+			}
+		});
+}
+function output_useform(res,results) {
+	res.render('userform.jade',
+		   { title: "Choose a country",
+		     results: results }
+	  );
+}
+
 
 exports.do_work = function(req, res){
+  connection = mysql.createConnection(db_config);
   var country = req.query.country; // $_GET["country"]
+  var year = req.query.year;
   if (country) { 
+    query_db2(res,)
+  /*
     res.render('chartform.jade', { 
       title: "Here's Your Chart",
       country: country
-    });
+    });*/
   }
   else {
-    res.render('userform.jade', { 
+    query_db1(res);
+    /*res.render('userform.jade', { 
   	  title: 'Try Interacting With Our Database' 
-    });
+    });*/
   }
 };

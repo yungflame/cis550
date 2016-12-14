@@ -18,3 +18,22 @@ html
             li
               a(href='/contact') Contact Us
       br
+      .container
+        .row
+          .col-md-1
+          .col-md-2    
+            form(method='get', action='/userform')
+              p Select Country:
+                select(name = "country")
+                  - for (var inx=0; inx < results.length; inx++)
+                    option #{results[inx].COUNTRY}
+              p Select Year:
+                select(name = "year")
+                  option 1984
+                  option 1988
+                  option 1992
+                  option 1996
+                  option 2000
+                  option 2004
+                  option 2008
+              input(type='submit', value='Show chart')
