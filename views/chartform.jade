@@ -1,21 +1,53 @@
-html
-  head
-    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
-    script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
-  body
+head
+  meta(charset='UTF-8')
+  title User Interaction Chart
+  script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js')
+  script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js')
+  script(src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+  link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css')
+  script(src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+  script(src='script.js')
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js")
+body
+  div
     div
-      div
-        nav.navbar.navbar-inverse(role='navigation', style='padding-left:100px;')
-          ul.nav.navbar-nav
-            li
-              a(href='/') Home
-            li.active
-              a(href='/userform') 
-                | Try It Yourself
-                span.sr-only (current)
-            li
-              a(href='/about') About Us
-            li
-              a(href='/contact') Contact Us
-      br
-      p #{country}
+      nav.navbar.navbar-inverse(role='navigation', style='padding-left:100px;')
+        ul.nav.navbar-nav
+          li
+            a(href='/') Home
+          li.active
+            a(href='/userform') 
+              | Try It Yourself
+              span.sr-only (current)
+          li
+            a(href='/about') About Us
+          li
+            a(href='/contact') Contact Us
+    .page-header.text-center
+      h1 #{title}
+    // page-header
+    .container
+      div(style='height:400px;')
+        canvas#myChart(width='400', height='200')
+        script.
+          var ctx = document.getElementById("myChart");
+          var myChart = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                labels: ["Bronze", "Silver", "Gold"],
+                datasets: [{
+                  label: '# of Medals (Men)',
+                  data: [#{results[0].NUM}, #{results[4].NUM}, #{results[2].NUM}],
+                  backgroundColor: ['rgba(205, 127, 50, 0.2)','rgba(160, 160, 160, 0.2)','rgba(255, 206, 86, 0.2)'],
+                  borderColor: ['rgba(205, 127, 50, 1)','rgba(160, 160, 160, 1)','rgba(255, 206, 86, 1)'],
+                  borderWidth: 2
+                }, {
+                  label: '# of Medals (Women)',
+                  data: [#{results[1].NUM}, #{results[5].NUM}, #{results[3].NUM}],
+                  backgroundColor: ['rgba(205, 127, 20, 0.2)','rgba(160, 160, 130, 0.2)','rgba(255, 206, 56, 0.2)'],
+                  borderColor: ['rgba(205, 127, 20, 1)','rgba(160, 160, 130, 1)','rgba(255, 206, 56, 1)'],
+                  borderWidth: 2
+                }]
+              },
+              options: {scales: {yAxes: [{ticks: {beginAtZero:true}}]}}
+            });

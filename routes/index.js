@@ -43,14 +43,20 @@ var query_set = [
 	WHERE H.COUNTRY = C.COUNTRY \
 	  AND H.YEAR = C.YEAR \
 	  AND H.COST IS NOT NULL \
-	  AND H.YEAR >= 1972;"
+	  AND H.YEAR >= 1972;",
+// Query 4
+	"SELECT C.COUNTRY, C.POPULATION \
+	FROM COUNTRY_DATA C \
+	WHERE C.YEAR = 2014 \
+	  AND (C.COUNTRY = 'China' OR C.COUNTRY = 'Germany' OR C.COUNTRY = 'Canada' OR C.COUNTRY = 'Brazil' OR C.COUNTRY = 'India' OR C.COUNTRY = 'USA');"
 ]
 
 var chart_description_set = [ 
 	"The medal distribution between Japanese male and female medalists in the Athens 2004 Olympics",
 	"Comparing the GDP of China to the number of Chinese medalists from 1984 onwards",
 	"The medal distribution of the US by event gender at the Beijing 2008 Olympics",
-	"Cost of the Olympics for the host country vs log-GDP (both in USD)"
+	"Cost of the Olympics for the host country vs log-GDP (both in USD)",
+	"Comparing populations from high population countries around the world"
 ]
 
 function query_db(res, query_number) { 
@@ -64,7 +70,7 @@ function query_db(res, query_number) {
 				console.log(error); 
 			}
 			else {
-				//console.log(row);
+				console.log(row);
 				output_homepage(res, row, query_number);
 			}
 		});
@@ -83,8 +89,8 @@ function output_homepage(res,results, query_number) {
  
 exports.do_work = function(req, res){
 	connection = mysql.createConnection(db_config);
-	var i = getInt(0, query_set.length-1); // RNG FOR Homepage Chart
-  console.log(i);
+	//var i = getInt(0, query_set.length-1); // RNG FOR Homepage Chart
+	var i = 4;
 	query_db(res, i);
 };
 

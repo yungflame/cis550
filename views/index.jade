@@ -144,6 +144,47 @@ body
               }}
             });
           }
+          else if (#{charttype}==4) {
+            new Chart(ctx, {
+                type: 'polarArea',
+                data: {
+                  datasets: [{
+                      data: [
+                          #{results[4][0].POPULATION},
+                          #{results[4][1].POPULATION},
+                          #{results[4][2].POPULATION},
+                          #{results[4][3].POPULATION},
+                          #{results[4][4].POPULATION},
+                          #{results[4][5].POPULATION}
+                      ],
+                      backgroundColor: [
+                          "#FF6384",
+                          "#4BC0C0",
+                          "#FFCE56",
+                          "#E7E9ED",
+                          "#36A2EB",
+                          "#FF0000"
+                      ],
+                      label: 'Country Populations' // for legend
+                  }],
+                  labels: [
+                      "Brazil",
+                      "Canada",
+                      "China",
+                      "Germany",
+                      "India",
+                      "USA"
+                  ]
+              },
+              options: {
+                  elements: {
+                      arc: {
+                          borderColor: "#000000"
+                      }
+                  }
+              }
+            });
+          }
           else {
             console.log('No Such ChartType')
           }
