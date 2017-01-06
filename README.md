@@ -1,5 +1,9 @@
 # Charting the Olympics
 
+## Setup and modules
+
+This repository contains a Node application written using Express.js and Jade. The routes folder contains the JavaScript files for loading the web pages, and the views folder contains the Jade template files. To run, simply run the commands `npm install` (to install all of the required depenendices) and then `node app.js` to run the application on localhost.
+
 ## Objective
 
 The motivation behind our project was to gain an understanding of how performance in the Olympics relates to general facts about countries such as population, crime rates, and other statistics. We wanted to enable users to view possible correlations between these data points, hopefully sparking some conversation or reflection on how these correlations may have come about. We wanted to create a very usable and intuitive web app that enabled the user to view these data relationships in a clean and elegant manner.
