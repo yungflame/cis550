@@ -5,7 +5,7 @@ var serviceAccount = require('./cis550group33-firebase-adminsdk-6u35v-4643d3d6b9
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://cis550group33.firebaseio.com"
+  databaseURL: "***"
 });
 
 var db = admin.database();

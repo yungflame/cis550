@@ -1,10 +1,10 @@
 var mysql = require('mysql');
 
 var db_config ={
-  host: 'cis550group33.chgqikrkerri.us-west-2.rds.amazonaws.com',
-  user: 'maxying',
-  password: 'cis550group33',
-  database: 'PENNTR',
+  host: '***',
+  user: '***',
+  password: '***',
+  database: '***',
   multipleStatements: true
 };
 
